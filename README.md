@@ -1,41 +1,41 @@
-# Spotify Clone
+# Clon de Spotify
 
-A full-stack Spotify clone application built with Node.js, Express, PostgreSQL, and Docker.
+Una aplicación de clon de Spotify full-stack construida con Node.js, Express, PostgreSQL y Docker.
 
-## Features
+## Características
 
-- **Backend API**: RESTful API for managing artists, songs, and albums.
-- **Database**: PostgreSQL database for structured data storage.
-- **Dockerized Environment**: easy setup and deployment using Docker Compose.
+- **API Backend**: API RESTful para gestionar artistas, canciones y álbumes.
+- **Base de Datos**: Base de datos PostgreSQL para almacenamiento de datos estructurados.
+- **Entorno Dockerizado**: Configuración y despliegue sencillo utilizando Docker Compose.
 
-## Tech Stack
+## Tecnologías
 
 - **Backend**: Node.js, Express.js
-- **Database**: PostgreSQL
-- **Containerization**: Docker, Docker Compose
+- **Base de Datos**: PostgreSQL
+- **Contenedorización**: Docker, Docker Compose
 
-## Prerequisites
+## Requisitos Previos
 
-Before you begin, ensure you have the following installed:
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- [Docker](https://www.docker.com/) & Docker Compose
+- [Node.js](https://nodejs.org/) (v14 o superior)
+- [Docker](https://www.docker.com/) y Docker Compose
 - [npm](https://www.npmjs.com/)
 
-## Installation & Setup
+## Instalación y Configuración
 
-1.  **Clone the repository**
+1.  **Clonar el repositorio**
 
     ```bash
-    git clone <your-repo-url>
+    git clone <tu-url-del-repositorio>
     cd spotify-clone
     ```
 
-2.  **Environment Variables**
+2.  **Variables de Entorno**
 
-    Create a `.env` file in the `backend` directory (if not already present, though typically this is gitignored) with your configuration.
+    Crea un archivo `.env` en el directorio `backend` (si no está presente, aunque generalmente se ignora en git) con tu configuración.
 
-    Example `.env`:
+    Ejemplo `.env`:
 
     ```env
     PORT=3000
@@ -46,39 +46,39 @@ Before you begin, ensure you have the following installed:
     DB_PORT=5432
     ```
 
-3.  **Start the Database**
+3.  **Iniciar la Base de Datos**
 
-    Use Docker Compose to spin up the PostgreSQL database and pgAdmin.
+    Usa Docker Compose para levantar la base de datos PostgreSQL y pgAdmin.
 
     ```bash
     docker-compose up -d
     ```
 
-4.  **Install Backend Dependencies**
+4.  **Instalar Dependencias del Backend**
 
-    Navigate to the backend directory and install dependencies.
+    Navega al directorio del backend e instala las dependencias.
 
     ```bash
     cd backend
     npm install
     ```
 
-5.  **Run the Application**
+5.  **Ejecutar la Aplicación**
 
-    Start the backend server.
+    Inicia el servidor backend.
 
     ```bash
     npm run dev
     ```
 
-    The server should now be running on `http://localhost:3000` (or your defined port).
+    El servidor debería estar corriendo en `http://localhost:3000` (o tu puerto definido).
 
-## API Endpoints
+## Endpoints de la API
 
-- `GET /api/artists`: Get all artists
-- `GET /api/songs`: Get all songs
-- (Add more endpoints as you implement them)
+- `GET /api/artists`: Obtener todos los artistas
+- `GET /api/songs`: Obtener todas las canciones
+- (Añade más endpoints a medida que los implementes)
 
-## Contributing
+## Contribuciones
 
-Contributions are welcome! Please fork the repository and submit a pull request.
+¡Las contribuciones son bienvenidas! Por favor haz un fork del repositorio y envía un pull request.
