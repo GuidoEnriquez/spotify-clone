@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const pool = require('./config/db');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,6 +11,8 @@ const songRoutes = require('./routes/songRoutes');
 const playlistRoutes = require('./routes/playlistRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+
+app.use(cors());
 app.use(express.json()); // Middleware para parsear JSON
 app.use('/api/artists', artistRoutes);
 app.use('/api/songs', songRoutes);

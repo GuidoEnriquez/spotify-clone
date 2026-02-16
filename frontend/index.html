@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1>REGISTRO DE USUARIO</h1>
+            <form action="" id="registerForm">
+                <input type="text" id="username" placeholder="Usuario">
+                <input type="text" id="email" placeholder="Email">
+                <input type="password" id="password" placeholder="Contraseña">
+                <button type="submit">Registrarse</button>
+            </form>
+            <div id="message">
+
+            </div>
+        </section>
+        <section>
+            <!-- Formulario de Login -->
+            <h2>INICIAR SESIÓN</h2>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Contraseña" required>
+                <button type="submit">Ingresar</button>
+            </form>
+<div id="loginMessage"></div>
+        </section>
+    </main>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
