@@ -6,10 +6,15 @@ const pool = require('./config/db');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const artistRoutes = require('./routes/artistRoutes');
+const songRoutes = require('./routes/songRoutes');
+const playlistRoutes = require('./routes/playlistRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 app.use(express.json()); // Middleware para parsear JSON
 app.use('/api/artists', artistRoutes);
-app.use('/api/songs', require('./routes/songRoutes'));
+app.use('/api/songs', songRoutes);
+app.use('/api/playlists', playlistRoutes);
+app.use('/api/users', userRoutes);
 
 app.get('/test-db', async (req, res) => {
   try {
