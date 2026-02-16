@@ -1,22 +1,22 @@
-version: '3.8'
+version: "3.8"
 
 services:
   postgres:
-    image: postgres:15
+    image: docker.io/library/postgres:15
     container_name: postgres_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: spotify
     ports:
-      - "5432:5432"
+      - "${DB_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - spotify
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: docker.io/dpage/pgadmin4
     container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
