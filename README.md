@@ -79,6 +79,32 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 - `GET /api/songs`: Obtener todas las canciones
 - (Añade más endpoints a medida que los implementes)
 
+## Solución de Problemas (Troubleshooting)
+
+### Error: `ECONNREFUSED` (Conexión a Base de Datos rechazada)
+
+Si al iniciar el servidor con `npm run dev` obtienes un error `ECONNREFUSED`, significa que los contenedores de la base de datos están apagados. Esto suele ocurrir **después de reiniciar la computadora**.
+
+**Solución**:
+Inicia los contenedores manualmente:
+
+- **Si usas Docker**:
+
+  ```bash
+  docker compose up -d
+  ```
+
+- **Si usas Podman**:
+  ```bash
+  podman compose up -d
+  ```
+
+Luego verifica la conexión:
+
+```bash
+curl http://localhost:3000/test-db
+```
+
 ## Contribuciones
 
 ¡Las contribuciones son bienvenidas! Por favor haz un fork del repositorio y envía un pull request.

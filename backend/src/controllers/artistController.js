@@ -54,4 +54,22 @@ const getArtistById = async (req, res) => {
     }
 };
 
-module.exports = { getArtists, getArtistById };
+const createArtist = async (req, res) => {
+    const { name, bio, image_url } = req.body;
+
+    if(!name){
+        return res.status(400).json({error: 'EL nombre del artista es obligatorio'});
+    }
+    try{
+        const query = 'INSERT INTO artists (name, bio, image_url) VALUES ($1, $2, $3) RETURNING *';
+        const values = [name, bio, image_url];
+        const result = await pool.query(query, values);
+
+        res.status(201).json(result.rows[0]);
+    }catch(err){
+        console.error("ERROR EN DATABASE: ", err);
+        res.status(500).json({error: 'Error al crear el artista'});
+    }
+};
+
+module.exports = { getArtists, getArtistById, createArtist };

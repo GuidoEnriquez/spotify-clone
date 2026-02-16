@@ -7,7 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const artistRoutes = require('./routes/artistRoutes');
 
+app.use(express.json()); // Middleware para parsear JSON
 app.use('/api/artists', artistRoutes);
+app.use('/api/songs', require('./routes/songRoutes'));
 
 app.get('/test-db', async (req, res) => {
   try {
@@ -23,4 +25,3 @@ app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto en http://localhost:${PORT}`);
 }) ;
 
-app.use('/api/songs', require('./routes/songRoutes'));
