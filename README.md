@@ -27,7 +27,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 1.  **Clonar el repositorio**
 
     ```bash
-    git clone <tu-url-del-repositorio>
+    git clone <https://github.com/GuidoEnriquez/spotify-clone.git>
     cd spotify-clone
     ```
 
