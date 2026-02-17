@@ -43,9 +43,49 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 5. Cargar Playlists (Simulado por ahora)
+    // 5. Cargar Playlists
     loadPlaylists(user.id);
+    // 7. Cargar Canciones
+    loadSongs();
 });
+
+/* ... loadPlaylists ... */
+
+async function loadSongs() {
+    const container = document.getElementById('songsContainer');
+    try {
+        const response = await fetch('http://localhost:4000/api/songs');
+        const songs = await response.json();
+
+        if (songs.length === 0) {
+            container.innerHTML = "<p>No hay canciones disponibles.</p>";
+            return;
+        }
+
+        container.innerHTML = "";
+        songs.forEach(song => {
+            const div = document.createElement('div');
+            div.style.borderBottom = "1px solid #eee";
+            div.style.padding = "5px";
+            // Mostramos título y artista (desde el JOIN con albums -> artist? 
+            // Ojo: en tu query de getSongs hacías JOIN con albums, pero el campo se llama `title` y `album_name`)
+            div.innerHTML = `
+                <span>${song.title} - <strong>${song.album_name || 'Desconocido'}</strong></span>
+                <button onclick="addSongToPlaylist(${song.id})">Agregar a Playlist</button>
+            `;
+            container.appendChild(div);
+        });
+
+    } catch (error) {
+        console.error("Error:", error);
+        container.innerHTML = "<p>Error al cargar canciones.</p>";
+    }
+}
+
+// Función placeholder para el futuro
+function addSongToPlaylist(songId) {
+    alert("Próximamente: Agregar canción " + songId);
+}
 
 async function loadPlaylists(userId) {
     const container = document.getElementById('playlistsContainer');
