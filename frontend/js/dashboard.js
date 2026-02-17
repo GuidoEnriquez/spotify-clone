@@ -18,6 +18,31 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = 'index.html';
     });
 
+    // 6. Crear Playlist
+    document.getElementById("createPlaylistForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("playlistName").value;
+        const description = document.getElementById("playlistDesc").value;
+
+        try {
+            const response = await fetch('http://localhost:4000/api/playlists', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, description, user_id: user.id })
+            });
+
+            if (response.ok) {
+                document.getElementById("createPlaylistForm").reset();
+                loadPlaylists(user.id); // Recargar la lista
+            } else {
+                alert("Error al crear playlist");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Error de conexión");
+        }
+    });
+
     // 5. Cargar Playlists (Simulado por ahora)
     loadPlaylists(user.id);
 });
