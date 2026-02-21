@@ -1,0 +1,54 @@
+body {
+  background-color: #121212;
+  color: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+.btn-spotify {
+  background-color: #1db954;
+  color: black;
+  border-radius: 500px;
+  font-weight: bold;
+  border: none;
+  padding: 12px 32px;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+.btn-spotify:hover {
+  background-color: #1ed760;
+  transform: scale(1.04);
+  color: black;
+}
+.card-custom {
+  background-color: #000000;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid #282828;
+  padding: 40px 30px;
+  width: 100%;
+  height: 100%;
+}
+.form-control-custom {
+  background-color: #121212 !important;
+  border: 1px solid #727272 !important;
+  color: white !important;
+  border-radius: 4px;
+}
+.form-control-custom:focus {
+  border-color: white !important;
+  box-shadow: none !important;
+}
+.form-control-custom::placeholder {
+  color: #a7a7a7 !important;
+}
+.spotify-logo {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+.spotify-logo i {
+  color: #1db954;
+}
