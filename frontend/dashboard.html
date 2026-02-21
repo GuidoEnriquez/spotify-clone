@@ -1,37 +1,141 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Spotify Clone - Web Player</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <main>
-        <h1>Hola, <span id="usernameDisplay">Usuario</span></h1>
-        <button id="logoutBtn">Cerrar Sesión</button>
-        <section>
-            <h2>Mis Playlists</h2>
-            <div id="playlistsContainer">
-                <p>Cargando playlists...</p>
+<body class="d-flex flex-column vw-100 vh-100">
+
+    <div class="d-flex flex-grow-1">
+        <!-- Sidebar Izquierda -->
+        <aside class="sidebar col-2 d-none d-md-block d-flex flex-column">
+            <div class="px-4 mb-4">
+                <div class="spotify-logo fs-4 mt-0 mb-0">
+                    <i class="bi bi-spotify"></i> Spotify
+                </div>
             </div>
-        </section>
-        <section>
-    <h2>Crear Nueva Playlist</h2>
-    <form id="createPlaylistForm">
-        <input type="text" id="playlistName" placeholder="Nombre de la playlist" required>
-        <input type="text" id="playlistDesc" placeholder="Descripción (opcional)">
-        <button type="submit">Crear</button>
-    </form>
-</section>
+            
+            <ul class="nav flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <i class="bi bi-house-door-fill"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="bi bi-search"></i> Buscar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="bi bi-collection"></i> Tu Biblioteca
+                    </a>
+                </li>
+            </ul>
 
-<section>
-    <h2>Canciones Disponibles</h2>
-    <div id="songsContainer">
-        <p>Cargando canciones...</p>
+            <div class="px-4 mt-4">
+                <p class="text-uppercase text-secondary fw-bold" style="font-size: 0.75rem; letter-spacing: 1px;">Playlists</p>
+                <div id="playlistsContainer" class="text-secondary">
+                    <p class="small">Cargando...</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Contenido Principal Central -->
+        <main class="main-content col-12 col-md-10">
+            <!-- Barra Superior (Topbar) con Usuario -->
+            <div class="topbar w-100 mb-4">
+                <div class="dropdown">
+                    <button class="btn btn-dark rounded-pill dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle fs-5 me-2"></i>
+                        <span id="usernameDisplay">Usuario</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><button class="dropdown-item" id="logoutBtn">Cerrar sesión</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <section class="mb-5">
+                <h2 class="fw-bold fs-3 mb-4">Canciones de Synthwave</h2>
+                <!-- Grid de canciones -->
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4" id="songsContainer">
+                    <div class="col">
+                        <p class="text-secondary">Cargando canciones...</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2 class="fw-bold fs-3 mb-4">Crear Playlist Temporales</h2>
+                <div class="card bg-dark border-secondary p-3 w-50">
+                    <form id="createPlaylistForm">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="playlistName" placeholder="Nombre de tu nueva playlist" required>
+                            <button class="btn btn-outline-light" type="submit">Crear</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
     </div>
-</section>
-    </main>
 
+    <!-- Barra de Reproductor Inferior (Player) -->
+    <footer class="player-bar d-flex justify-content-between align-items-center px-4">
+        <!-- Info de la canción izq -->
+        <div class="d-flex align-items-center" style="width: 30%;">
+            <div class="bg-secondary rounded me-3" style="width: 56px; height: 56px;" id="playerCoverPlaceholder"></div>
+            <div>
+                <h6 class="mb-0 fw-bold" id="playerTitle">Sin reproducir</h6>
+                <small class="text-secondary" id="playerArtist">-</small>
+            </div>
+        </div>
+
+        <!-- Controles centrales -->
+        <div class="d-flex flex-column align-items-center" style="width: 40%;">
+            <div class="d-flex align-items-center gap-3 mb-1">
+                <button class="btn btn-link link-secondary p-0 text-decoration-none fs-5"><i class="bi bi-shuffle"></i></button>
+                <button class="btn btn-link link-secondary p-0 text-decoration-none fs-4"><i class="bi bi-skip-backward-fill"></i></button>
+                <button class="btn btn-light rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="bi bi-play-fill fs-5 text-dark"></i>
+                </button>
+                <button class="btn btn-link link-secondary p-0 text-decoration-none fs-4"><i class="bi bi-skip-forward-fill"></i></button>
+                <button class="btn btn-link link-secondary p-0 text-decoration-none fs-5"><i class="bi bi-repeat"></i></button>
+            </div>
+            <div class="w-100 d-flex align-items-center gap-2">
+                <small class="text-secondary" style="font-size: 0.7rem;">0:00</small>
+                <div class="progress w-100" style="height: 4px; background-color: #4d4d4d;">
+                    <div class="progress-bar bg-white" role="progressbar" style="width: 0%"></div>
+                </div>
+                <small class="text-secondary" style="font-size: 0.7rem;">0:00</small>
+            </div>
+        </div>
+
+        <!-- Controles extra der -->
+        <div class="d-flex justify-content-end align-items-center gap-3" style="width: 30%;">
+            <button class="btn btn-link link-secondary p-0 text-decoration-none"><i class="bi bi-mic"></i></button>
+            <button class="btn btn-link link-secondary p-0 text-decoration-none"><i class="bi bi-list"></i></button>
+            <button class="btn btn-link link-secondary p-0 text-decoration-none"><i class="bi bi-pc-display"></i></button>
+            <div class="d-flex align-items-center gap-1 w-25">
+                <i class="bi bi-volume-up text-secondary"></i>
+                <div class="progress w-100" style="height: 4px; background-color: #4d4d4d;">
+                    <div class="progress-bar bg-white" role="progressbar" style="width: 50%"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/dashboard.js"></script>
 </body>
 </html>
