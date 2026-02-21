@@ -1,84 +1,83 @@
 # Spotify Clone
 
-Una aplicación de clon de Spotify full-stack construida con **Node.js, Express, PostgreSQL y Podman**. Este proyecto simula las funcionalidades básicas de streaming de música, incluyendo gestión de artistas, álbumes, canciones y listas de reproducción de usuarios.
+Una aplicación web full-stack que replica las funcionalidades básicas de Spotify, permitiendo a los usuarios registrarse, explorar música, crear listas de reproducción personalizadas y disfrutar de una experiencia de reproducción completa.
 
-## Tecnologías Utilizadas
+## ✨ Funcionalidades
 
-- **Backend**: Node.js, Express.js
-- **Base de Datos**: PostgreSQL 15
-- **Contenedorización**: Podman, Podman Compose (compatible con Docker)
-- **Gestión de Base de Datos**: pgAdmin 4
+- **Autenticación de Usuarios**: Registro e inicio de sesión seguro (contraseñas hasheadas y almacenamiento de sesión).
+- **Dashboard Interactivo**: Interfaz moderna de temática oscura inspirada en Spotify utilizando Bootstrap 5.
+- **Reproductor de Música Funcional**:
+  - Reproducción continua utilizando audios reales almacenados en la nube.
+  - Barra de progreso interactiva (seek).
+  - Control de volumen interactivo y botón de silenciar (mute).
+  - Sincronización visual del artista, título de canción y portada generada automáticamente.
+- **Gestión de Playlists**:
+  - Creación de listas de reproducción personalizadas.
+  - Agregar canciones a múltiples listas a través de menús desplegables.
+  - Filtrado dinámico para ver únicamente las canciones de una playlist en particular seleccionándola en la barra lateral.
+- **Buscador en Tiempo Real**: Filtrado dinámico de canciones por nombre de pista o artista directamente en la interfaz principal.
 
-## Requisitos Previos
+## 🛠️ Tecnologías Utilizadas
 
-- [Node.js](https://nodejs.org/) (v14 o superior)
-- [Podman](https://podman.io/) (y podman-compose) o Docker
+### Frontend
 
-## Configuración y Ejecución
+- HTML5 y CSS3 (Custom Spotify Theme)
+- JavaScript (Vanilla JS, manipulación del DOM y Fetch API)
+- Bootstrap 5 (Grillas, Componentes, Utilidades) e Icons
 
-### 1. Clonar el repositorio
+### Backend
 
-```bash
-git clone https://github.com/GuidoEnriquez/spotify-clone.git
-cd spotify-clone
-```
+- Node.js
+- Express.js (API REST)
+- Cors, Dotenv, y Bcryptjs
 
-### 2. Configuración de Entorno
+### Base de Datos y Almacenamiento
 
-El proyecto está configurado para ser portátil entre diferentes entornos.
+- **Supabase (PostgreSQL)**: Gestión de base de datos relacional en la nube (`users`, `artists`, `albums`, `songs`, `playlists`, `playlist_songs`).
+- **Supabase Storage**: Alojamiento en la nube (Public Bucket) para los archivos `.mp3`.
 
-- El archivo `docker-compose.yml` utiliza una variable `DB_PORT` para evitar conflictos de puertos.
-- En tu máquina local, si el puerto `5432` está ocupado, puedes crear un archivo `.env` en la raíz (ya está configurado en tu entorno actual) para usar otro puerto (ej: `5433`).
+## 🚀 Configuración y Ejecución local
 
-### 3. Iniciar la Base de Datos
+### 1. Requisitos Previos
 
-Utiliza Podman Compose para levantar los contenedores de PostgreSQL y pgAdmin:
+- [Node.js](https://nodejs.org/) instalado en tu entorno local.
+- Un proyecto habilitado en [Supabase](https://supabase.com/).
 
-```bash
-podman compose up -d
-```
+### 2. Configuración del Entorno (Backend)
 
-Esto iniciará:
-
-- **Base de Datos (Postgres)**: Accesible en `localhost:5433` (o el puerto configurado).
-- **pgAdmin**: Accesible en `http://localhost:5050` (Email: `admin@admin.com`, Password: `password`).
-
-### 4. Iniciar el Backend
-
-Navega al directorio del backend, instala dependencias e inicia el servidor:
+Clona el repositorio e instala las dependencias del servidor:
 
 ```bash
 cd backend
 npm install
+```
+
+Crea un archivo `.env` en la carpeta `backend` con el siguiente formato:
+
+```env
+PORT=4000
+DATABASE_URL="postgres://postgres.xxxxx:tu-password-seguro@aws-0-REGION.pooler.supabase.com:6543/postgres"
+```
+
+Inicia el servidor en modo desarrollo:
+
+```bash
 npm run dev
 ```
 
-El servidor correrá en `http://localhost:3000`.
+### 3. Ejecutar el Frontend
 
-## Scripts de Base de Datos (Seeding)
+Dado que el frontend está construido con Vanilla JS, HTML y CSS estático, basta con abrir el archivo `frontend/index.html` en tu navegador web o utilizar la extensión _Live Server_ de tu editor de código.
 
-El proyecto incluye un script SQL para crear el esquema y cargar datos de prueba. Si necesitas reiniciar la base de datos con datos frescos:
+## 🗄️ Esquema de la Base de Datos
 
-```bash
-# Desde la raíz del proyecto
-podman exec -i postgres_db psql -U postgres -d spotify < backend/src/scripts/seed.sql
-```
+Las tablas principales en Supabase se dividen en:
 
-## Estructura de la Base de Datos
+- `users`: Registra los usuarios autenticados.
+- `artists` & `albums`: Catálogo musical.
+- `songs`: Información de pistas (Título, URL de Storage, ID del Álbum).
+- `playlists` & `playlist_songs`: Permiten la relación de "Muchos a Muchos" para guardar canciones en listas personalizadas.
 
-El esquema base de datos relacional incluye:
+---
 
-- **users**: Usuarios de la plataforma (username, email, password).
-- **artists**: Información de artistas (nombre, bio, foto).
-- **albums**: Álbumes asociados a artistas.
-- **songs**: Canciones pertenecientes a álbumes.
-- **playlists**: Listas creadas por usuarios.
-- **playlist_songs**: Tabla intermedia para relacionar canciones con playlists.
-
-Todas las tablas incluyen soporte para _Soft Delete_ (`deleted_at`) y restricción de integridad referencial (`ON DELETE CASCADE`).
-
-## Endpoints de la API (Ejemplos)
-
-- `GET /api/artists`: Obtener todos los artistas.
-- `GET /api/songs`: Obtener todas las canciones.
-- `GET /test-db`: Verificar conexión a la base de datos.
+_Desarrollado como proyecto de aprendizaje explorando la integración de bases de datos serverless (Supabase) con APIs en Node.js y un Frontend Vanilla responsivo._

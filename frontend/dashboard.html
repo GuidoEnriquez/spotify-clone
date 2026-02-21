@@ -50,10 +50,17 @@
 
         <!-- Contenido Principal Central -->
         <main class="main-content col-12 col-md-10">
-            <!-- Barra Superior (Topbar) con Usuario -->
-            <div class="topbar w-100 mb-4">
+            <!-- Barra Superior (Topbar) con Búsqueda y Usuario -->
+            <div class="topbar w-100 mb-4 d-flex justify-content-between align-items-center">
+                <!-- Buscador -->
+                <div class="w-50 position-relative">
+                    <i class="bi bi-search position-absolute top-50 translate-middle-y text-secondary ms-3"></i>
+                    <input type="text" class="form-control bg-dark text-white border-0 rounded-pill ps-5 py-2" id="searchInput" placeholder="Buscar canciones o artistas..." style="background-color: #242424 !important;">
+                </div>
+
+                <!-- Usuario -->
                 <div class="dropdown">
-                    <button class="btn btn-dark rounded-pill dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-dark rounded-pill dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: rgba(0,0,0,0.7);">
                         <i class="bi bi-person-circle fs-5 me-2"></i>
                         <span id="usernameDisplay">Usuario</span>
                     </button>
@@ -89,6 +96,9 @@
         </main>
     </div>
 
+    <!-- Elemento de Audio Oculto -->
+    <audio id="audioPlayer"></audio>
+
     <!-- Barra de Reproductor Inferior (Player) -->
     <footer class="player-bar d-flex justify-content-between align-items-center px-4">
         <!-- Info de la canción izq -->
@@ -105,18 +115,18 @@
             <div class="d-flex align-items-center gap-3 mb-1">
                 <button class="btn btn-link link-secondary p-0 text-decoration-none fs-5"><i class="bi bi-shuffle"></i></button>
                 <button class="btn btn-link link-secondary p-0 text-decoration-none fs-4"><i class="bi bi-skip-backward-fill"></i></button>
-                <button class="btn btn-light rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                <button id="masterPlayBtn" class="btn btn-light rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                     <i class="bi bi-play-fill fs-5 text-dark"></i>
                 </button>
                 <button class="btn btn-link link-secondary p-0 text-decoration-none fs-4"><i class="bi bi-skip-forward-fill"></i></button>
                 <button class="btn btn-link link-secondary p-0 text-decoration-none fs-5"><i class="bi bi-repeat"></i></button>
             </div>
             <div class="w-100 d-flex align-items-center gap-2">
-                <small class="text-secondary" style="font-size: 0.7rem;">0:00</small>
-                <div class="progress w-100" style="height: 4px; background-color: #4d4d4d;">
-                    <div class="progress-bar bg-white" role="progressbar" style="width: 0%"></div>
+                <small class="text-secondary" style="font-size: 0.7rem;" id="currentTime">0:00</small>
+                <div class="progress w-100" style="height: 4px; background-color: #4d4d4d; cursor: pointer;" id="progressContainer">
+                    <div class="progress-bar bg-white" role="progressbar" style="width: 0%" id="progressBar"></div>
                 </div>
-                <small class="text-secondary" style="font-size: 0.7rem;">0:00</small>
+                <small class="text-secondary" style="font-size: 0.7rem;" id="totalTime">0:00</small>
             </div>
         </div>
 
@@ -126,9 +136,9 @@
             <button class="btn btn-link link-secondary p-0 text-decoration-none"><i class="bi bi-list"></i></button>
             <button class="btn btn-link link-secondary p-0 text-decoration-none"><i class="bi bi-pc-display"></i></button>
             <div class="d-flex align-items-center gap-1 w-25">
-                <i class="bi bi-volume-up text-secondary"></i>
-                <div class="progress w-100" style="height: 4px; background-color: #4d4d4d;">
-                    <div class="progress-bar bg-white" role="progressbar" style="width: 50%"></div>
+                <i class="bi bi-volume-up text-secondary" id="volumeIcon"></i>
+                <div class="progress w-100" style="height: 4px; background-color: #4d4d4d; cursor: pointer;" id="volumeContainer">
+                    <div class="progress-bar bg-white" role="progressbar" style="width: 50%" id="volumeBar"></div>
                 </div>
             </div>
         </div>

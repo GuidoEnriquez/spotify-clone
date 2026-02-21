@@ -98,3 +98,8 @@ body {
     justify-content: flex-end;
     align-items: center;
 }
+
+/* Ocultar la flecha que Bootstrap pone por defecto en los dropdowns */
+.dropdown-toggle-no-caret::after {
+    display: none;
+}
